@@ -3,7 +3,7 @@ export default function Input({id,type,placeholder,onChange,required,label,value
 
     return(
         <>
-        <label htmlFor={id} className="text-sm font-bold text-gray-300 font-mono">
+        <label htmlFor={id} className="font-mono text-sm font-bold text-gray-100">
             {label}
         </label>
         { value && (

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { supabase } from '../utils/supabaseClient'
 import { useState, useEffect } from 'react'
 import { ThemeProvider } from 'next-themes'
-import { TextClass, NavLink } from "../constants/styling";
+import { NavLinkText, NavLink } from "../constants/styling";
 import { useRouter } from 'next/router'
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -77,38 +77,61 @@ function MyApp({ Component, pageProps }) {
   }
   return ( 
     <div className='bg-blue"'>
-      <nav className="flex justify-start p-6 pr-12 text-xl bg-blue-700 border-b border-blue-700 rounded-md">
-        <Link href="/">
-          <span className={NavLink}>Home</span>
-        </Link>
-      { signedInUser && (
-          <>
-            <Link href="/profile">
-              <span className={NavLink}>Profile</span>
+      <nav className="flex flex-wrap items-center justify-between p-6 pr-12 text-xl bg-blue-700 border-b border-blue-700 rounded-sm">
+        <div className="block lg:hidden">
+          <button className="flex items-center px-3 py-2 text-teal-200 border border-teal-400 rounded hover:text-white hover:border-white">
+            <svg className="w-3 h-3 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+          </button>
+        </div>
+        <div className="flex-grow block w-full lg:flex lg:items-center lg:w-auto">
+          <div className="lg:flex-grow"> 
+            <Link href="/">
+              <a className={NavLink} href="">Home</a>
             </Link>
-            <Link href="/buy-a-website">
-              <span className={NavLink}>Buy a Website</span>
-            </Link>
-            <Link href="/sign-out">
-              <span className="ml-auto font-mono text-xl text-gray-300 cursor-pointer"	>Logout</span>
-            </Link>
-          </>
-          )
-        }
-        { !signedInUser && (
-          <div className='flex justify-between ml-auto text-xl text-bold'>
-            <Link href="/sign-in">
-              <span className="ml-12 font-mono text-xl text-gray-300 cursor-pointer text-bold ">Login</span>
-            </Link>
-       
-            <Link href="/sign-up">
-              <span className="ml-12 font-mono text-xl text-gray-300 cursor-pointer text-bold ">Sign Up</span>
-            </Link>
-            
+
+            { signedInUser && (
+            <>
+              <Link href="/profile">
+                <a href="" className={NavLink}>
+                  Profile
+                </a>
+              </Link>
+              <Link href="/buy-a-website">
+                <a href="" className={NavLink}>
+                  Buy Website
+                </a>
+              </Link>
+            </>
+            )}
           </div>
-          )
-        }
+          <div>
+          { signedInUser && (
+            <>
+              <Link href="/sign-out">
+                <a href="" className={NavLink}>
+                  Logout
+                </a>
+              </Link>
+            </>
+            )}
+            { !signedInUser && (
+            <>
+              <Link href="/sign-in">
+                <a href="" className={NavLink}>
+                  Login
+                </a>
+              </Link>
+              <Link href="/sign-up">
+                <a href="" className={NavLink}>
+                  Sign Up
+                </a>
+              </Link>
+            </>
+            )}
+          </div>
+        </div>
       </nav>
+
       <Toaster
         toastOptions={{
           duration: 3700,
