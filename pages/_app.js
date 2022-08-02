@@ -5,12 +5,30 @@ import { useState, useEffect } from 'react'
 import { ThemeProvider } from 'next-themes'
 import { TextClass, NavLink } from "../constants/styling";
 import { useRouter } from 'next/router'
-
+import toast, { Toaster } from 'react-hot-toast';
 
 function MyApp({ Component, pageProps }) {
   const [ signedInUser, setSignedInUser ] = useState(false)
 
   const router = useRouter()
+  
+
+  useEffect(() => {
+    const handleRouteChangeError = (err, url) => {
+      if (err.cancelled) {
+        console.log(`Route to ${url} was cancelled!`)
+      }
+    }
+
+    router.events.on('routeChangeError', handleRouteChangeError)
+
+    // If the component is unmounted, unsubscribe
+    // from the event with the `off` method:
+    return () => {
+      router.events.off('routeChangeError', handleRouteChangeError)
+    }
+  }, [])
+  
 
   useEffect( () => {
     getUserProfile()
@@ -22,6 +40,8 @@ function MyApp({ Component, pageProps }) {
       if (event == 'SIGNED_IN') {
         setSignedInUser(true)
         getUserProfile()
+        router.push("/")
+
       }
       else if (event == 'SIGNED_OUT') {
         setSignedInUser(false)
@@ -30,7 +50,7 @@ function MyApp({ Component, pageProps }) {
       }
     })
 
-    return () => authListner.unsubscribe()
+    return () => { authListner.unsubscribe() }
 
   },[])
 
@@ -58,11 +78,11 @@ function MyApp({ Component, pageProps }) {
   return ( 
     <div className='bg-blue"'>
       <nav className="flex justify-start p-6 pr-12 text-xl bg-blue-700 border-b border-blue-700 rounded-md">
+        <Link href="/">
+          <span className={NavLink}>Home</span>
+        </Link>
       { signedInUser && (
           <>
-            <Link href="/">
-              <span className={NavLink}>Home</span>
-            </Link>
             <Link href="/profile">
               <span className={NavLink}>Profile</span>
             </Link>
@@ -89,7 +109,22 @@ function MyApp({ Component, pageProps }) {
           )
         }
       </nav>
-    
+      <Toaster
+        toastOptions={{
+          duration: 3700,
+
+          success: {
+            style: {
+              background: '#8bfa69',
+            },
+          },
+          error: {
+            style: {
+              background: '#fc6f6f',
+            },
+          },
+        }}
+      />
       <div>
 
       </div>

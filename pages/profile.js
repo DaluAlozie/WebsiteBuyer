@@ -2,7 +2,7 @@ import getUser from '../components/protected'
 import ProfileForm from '../components/update-profile-form';
 import { supabase } from '../utils/supabaseClient'
 import { useState, useEffect } from 'react'
-import Link from 'next/link'
+import toast, { Toaster } from 'react-hot-toast';
 
 
 const fields= {
@@ -43,12 +43,12 @@ function Profile( {user} ) {
                 }
             )
 
-            if (error) console.log(error)
-            else if (data) ""
+            if (error) toast.error(error.message)
+            else if (data) toast.success("Reset link sent to email")
 
             
         } catch (error) {
-            console.log(error)
+            toast.error("An error occured :/")
         }        
 
         e.target.disabled = false
@@ -63,12 +63,24 @@ function Profile( {user} ) {
 
         else{
             const user = supabase.auth.user()
-            const { data, error } = await supabase
-                .from('Profile')
-                .update({firstName: capitalizeFirstLetter(firstName.toString()),
-                        surname: capitalizeFirstLetter(surname.toString()) 
-                })
-                .eq("user_id", user.id)
+            try {
+                const { data, error } = await supabase
+                    .from('Profile')
+                    .update({firstName: capitalizeFirstLetter(firstName.toString()),
+                            surname: capitalizeFirstLetter(surname.toString()) 
+                    })
+                    .eq("user_id", user.id)
+
+                    if (data && !error){
+                        toast.success("Update Successful")
+                    }
+                    else if (data && !error){
+                        toast.error("Update Unuccessful")
+                    }
+            } catch (error) {
+                toast.error("An error occured")
+            }
+            
         }
         e.target.disabled = false
 
@@ -89,7 +101,6 @@ function Profile( {user} ) {
       
 
     return (
-        <div>
         <ProfileForm 
             handleChange={ handleChange }
             handleReset={ handleReset }
@@ -97,8 +108,6 @@ function Profile( {user} ) {
             details= { details }
             error={ errorState }
         />
-
-        </div>
     )
 }
 

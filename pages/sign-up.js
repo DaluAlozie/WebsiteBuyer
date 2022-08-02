@@ -3,6 +3,7 @@ import { supabase } from '../utils/supabaseClient'
 import SignUpForm from '../components/sign-up-form';
 import { useRouter } from 'next/router'
 import getUser from '../components/unprotected'
+import toast, { Toaster } from 'react-hot-toast';
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -41,7 +42,8 @@ export default function () {
                 password: password
               })
               if (user){
-                const { data, error } = await supabase
+                try {
+                    const { data, error } = await supabase
                     .from('Profile')
                     .insert({
                         firstName: capitalizeFirstLetter(firstName.toString()),
@@ -52,7 +54,16 @@ export default function () {
                         returning: "minimal"
                       })
 
-                if (!error) router.push("/sign-in")
+                    if (!error) {
+                        toast.success("Confirmation link sent to email")
+                        router.push("/sign-in")
+                    }
+                    else{
+                        toast.error(error.message)
+                    }
+                } catch (error) {
+                    toast.error("An error occured")
+                }
               } 
               else setErrorState(error.message)
         }
@@ -61,10 +72,10 @@ export default function () {
 
     return(
         <SignUpForm 
-        handleChange={handleChange}
-        handleSubmit={handleSubmit} 
-        error={errorState}
-        password={password}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit} 
+            error={errorState}
+            password={password}
         />
     )   
 }

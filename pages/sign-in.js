@@ -3,6 +3,7 @@ import { supabase } from '../utils/supabaseClient'
 import LoginForm from '../components/sign-in-form';
 import { useRouter } from 'next/router'
 import getUser from '../components/unprotected'
+import toast, { Toaster } from 'react-hot-toast';
 
 
 const fields= {
@@ -35,7 +36,7 @@ export default function () {
                 email: email,
                 password: password
               })
-              if (user) router.push("/")
+              if (user) ""
               else setErrorState(error.message)
         }
         e.target.disabled = false

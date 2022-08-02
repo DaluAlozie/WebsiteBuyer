@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import ResetForm from "../components/password-reset-form"
 import { useRouter } from 'next/router'
 import { supabase } from '../utils/supabaseClient'
+import toast from 'react-hot-toast';
 
 const TextClass = "text-sm font-bold text-gray-300 font-mono"
 
@@ -41,13 +42,25 @@ export default function PasswordReset( context ){
         e.preventDefault()
         e.target.disabled = true
         if ( !(password == confirmPassword) ) setErrorState("Passwords do not match")
+        
         else if (type && type.toLowerCase() == "recovery"){
             const { error, data } = await supabase.auth.api
                 .updateUser(accessToken, { password : password })
             
-            if (error) setErrorState(error.message)
-            else if (data) ""
-        }    
+            if (error) toast.error("Something went wrong")
+            else if (data){
+                toast.success("Password changed successfully")
+                router.push("/")
+            } 
+            else{
+                toast.error("Something went wrong")
+            }
+        }
+        else{
+                toast.error("Something went wrong")
+            }
+        
+
         e.target.disabled = false
     }
 

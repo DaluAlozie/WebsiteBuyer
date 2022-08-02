@@ -14,7 +14,6 @@ export default function SignOut() {
     async function signOut() {
         try {
             await supabase.auth.signOut()
-            router.push("/sign-in")
 
         } catch (error) {}
     }
