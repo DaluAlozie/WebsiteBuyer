@@ -6,6 +6,8 @@ import Input from "./inputs";
 import Button from "./button";
 import Form from "./form";
 
+const dont = "Don't"
+
 export default function LoginForm({handleChange,handleSubmit,error}){
 
     function submitForm(e) {
@@ -61,7 +63,7 @@ export default function LoginForm({handleChange,handleSubmit,error}){
                 <Link className="inline-block "
                     href="/sign-up">
                         <span className="px-3 py-2 mb-3 font-mono text-sm leading-tight text-blue-500 align-baseline hover:text-blue-200">
-                            Don't have an account? Sign Up!
+                            {dont} have an account? Sign Up!
                         </span>
                 </Link>
 

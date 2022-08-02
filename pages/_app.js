@@ -27,7 +27,7 @@ function MyApp({ Component, pageProps }) {
     return () => {
       router.events.off('routeChangeError', handleRouteChangeError)
     }
-  }, [])
+  }, [router])
   
 
   useEffect( () => {
@@ -52,7 +52,7 @@ function MyApp({ Component, pageProps }) {
 
     return () => { authListner.unsubscribe() }
 
-  },[])
+  },[router])
 
   async function getUserProfile(){
 

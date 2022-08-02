@@ -19,11 +19,11 @@ export default function PasswordReset( context ){
     const [errorState, setErrorState] = useState("");
     const {password, confirmPassword} = details
 
-    const router = useRouter()
 
     
     useEffect( () => {
-        
+        const router = useRouter()
+
         const queryString = router.asPath;
         const urlParams = new URLSearchParams(queryString);
 
