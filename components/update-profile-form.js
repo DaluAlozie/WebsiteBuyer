@@ -24,6 +24,8 @@ export default function ProfileForm({handleChange,handleSubmit,handleReset,error
                     value={details.firstName}
                     required={true}
                     onChange={handleChange}
+                    label="First Name"
+
                 />
             </div>
             <div className="mb-4">
