@@ -3,14 +3,14 @@ import { supabase } from '../utils/supabaseClient'
 import { useRouter } from 'next/router'
 import { TextClass } from '../constants/styling';
 import checkAuthUser from '../components/protected';
+import { destroyCookie } from 'nookies';
 
-export default function SignOut() {
+export default function SignOut(res) {
     
     const router = useRouter()
 
     useEffect( () => {
         signOut()
-        window.localStorage.clear();
       },[])
     
     async function signOut() {
@@ -27,7 +27,17 @@ export default function SignOut() {
     )
 }
 
-export async function getServerSideProps(req) {
-    return checkAuthUser(req)
-}
+export async function getServerSideProps({req,res}) {
+    // Fetch data from external API
 
+    const { user, error } = await supabase.auth.api.getUserByCookie(req)
+
+    if (!user) {
+        return { props: {}, redirect: { destination: "/sign-in" } }
+    }
+
+    destroyCookie(res,"sb:token")
+
+    // Pass data to the page via props
+    return { props: { user } }
+}
