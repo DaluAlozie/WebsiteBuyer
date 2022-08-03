@@ -15,9 +15,12 @@ export default function SignOut(res) {
     
     async function signOut() {
         try {
-            await supabase.auth.signOut()
+            const {error} = await supabase.auth.signOut()
+            console.log(error);
 
-        } catch (error) {}
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return(
@@ -35,8 +38,6 @@ export async function getServerSideProps({req,res}) {
     if (!user) {
         return { props: {}, redirect: { destination: "/sign-in" } }
     }
-
-    destroyCookie(res,"sb:token")
 
     // Pass data to the page via props
     return { props: { user } }
