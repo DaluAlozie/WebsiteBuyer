@@ -6,6 +6,7 @@ import { ThemeProvider } from 'next-themes'
 import {NavLinkRight, NavLinkLeft } from "../constants/styling";
 import { useRouter } from 'next/router'
 import toast, { Toaster } from 'react-hot-toast';
+import { signOut } from '../components/sign-out'
 
 function MyApp({ Component, pageProps }) {
   const [ signedInUser, setSignedInUser ] = useState(false)
@@ -135,8 +136,8 @@ function MyApp({ Component, pageProps }) {
           <div className='flex flex-col items-end w-1/2 lg:inline-flex lg:flex-row lg:w-auto lg:items-center lg:h-auto'>
           { signedInUser && (
               <>
-              <Link href='/sign-out'>
-                <a className={NavLinkLeft}>
+              <Link href="">
+                <a className={NavLinkLeft} onClick={signOut}>
                   Logout
                 </a>
               </Link>
