@@ -5,17 +5,21 @@ import { TextClass } from '../constants/styling';
 import checkAuthUser from '../components/protected';
 import Button from '../components/button';
 export default function SignOut() {
+
     
     async function signOut() {
-    
-        await supabase.auth.signOut()
-    }
+        try {
+            await supabase.auth.signOut()
 
+        } catch (error) {}
+    }
+    signOut()
+    
     return(
         <div className={TextClass}>
             <h1>Logging Out.....</h1>
-            <Button
-                onClick={signOut}>
+            <Button>
+
             </Button>
         </div>
     )
