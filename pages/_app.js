@@ -44,6 +44,7 @@ function MyApp({ Component, pageProps }) {
 
       }
       else if (event == 'SIGNED_OUT') {
+        console.log("hh");
         setSignedInUser(false)
         getUserProfile()
         router.push("/sign-in")

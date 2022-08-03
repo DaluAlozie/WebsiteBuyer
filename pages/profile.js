@@ -1,4 +1,4 @@
-import getUser from '../components/protected'
+import checkAuthUser from '../components/protected'
 import ProfileForm from '../components/update-profile-form';
 import { supabase } from '../utils/supabaseClient'
 import { useState, useEffect } from 'react'
@@ -112,7 +112,7 @@ function Profile( {user} ) {
 }
 
 export async function getServerSideProps(req) {
-    return getUser(req)
+    return checkAuthUser(req)
 }
 
 

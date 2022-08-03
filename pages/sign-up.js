@@ -2,7 +2,7 @@ import { useState,useEffect } from 'react';
 import { supabase } from '../utils/supabaseClient'
 import SignUpForm from '../components/sign-up-form';
 import { useRouter } from 'next/router'
-import getUser from '../components/unprotected'
+import checkAnonUser from '../components/unprotected'
 import toast, { Toaster } from 'react-hot-toast';
 
 function capitalizeFirstLetter(string) {
@@ -81,5 +81,5 @@ export default function SignUp() {
 }
 
 export async function getServerSideProps(req) {
-    return getUser(req)
+    return checkAnonUser(req)
 }

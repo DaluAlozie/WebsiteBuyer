@@ -3,19 +3,15 @@ import { supabase } from '../utils/supabaseClient'
 import { useRouter } from 'next/router'
 import { TextClass } from '../constants/styling';
 
-export default function SignOut() {
-    
-    const router = useRouter()
+export default function SignOut({req}) {
 
     useEffect( () => {
         signOut()
       },[])
     
     async function signOut() {
-        try {
-            await supabase.auth.signOut()
-
-        } catch (error) {}
+     
+        await supabase.auth.signOut()
     }
 
     return(
@@ -24,3 +20,24 @@ export default function SignOut() {
         </div>
     )
 }
+
+
+export  async function getServerSideProps({req}) {
+    // Fetch data from external API
+
+    const { user, error } = await supabase.auth.api.getUserByCookie(req)
+
+    if (!user) {
+        return { props: {}, redirect: { destination: "/sign-in" } }
+    }
+
+    try {
+        await supabase.auth.api.deleteAuthCookie(req)
+    } catch (error) {
+        
+    }
+
+    // Pass data to the page via props
+    return { props: { user } }
+}
+

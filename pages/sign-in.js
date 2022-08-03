@@ -2,7 +2,7 @@ import { useState,useEffect } from 'react';
 import { supabase } from '../utils/supabaseClient'
 import LoginForm from '../components/sign-in-form';
 import { useRouter } from 'next/router'
-import getUser from '../components/unprotected'
+import checkAnonUser from '../components/unprotected'
 import toast, { Toaster } from 'react-hot-toast';
 
 
@@ -52,5 +52,5 @@ export default function SignIn() {
 }
 
 export async function getServerSideProps(req) {
-    return getUser(req)
+    return checkAnonUser(req)
 }

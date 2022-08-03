@@ -1,5 +1,5 @@
 import { supabase } from '../utils/supabaseClient'
-import getUser from '../components/protected'
+import checkAuthUser from '../components/protected'
 function BuyWebsite({user}) {
     return (
       <div className="container" style={{ padding: '50px 0 100px 0' }}>
@@ -9,7 +9,7 @@ function BuyWebsite({user}) {
 }
 
 export async function getServerSideProps(req) {
-  return getUser(req)
+  return checkAuthUser(req)
 }
 
 
