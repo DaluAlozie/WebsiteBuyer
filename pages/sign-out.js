@@ -14,13 +14,11 @@ export default function SignOut() {
         } catch (error) {}
     }
     signOut()
-    
+
     return(
         <div className={TextClass}>
             <h1>Logging Out.....</h1>
-            <Button>
-
-            </Button>
+         
         </div>
     )
 }
