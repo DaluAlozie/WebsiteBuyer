@@ -15,7 +15,7 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function Profile( {user} ) {
+function Profile( {user,headers} ) {
     
     const [details,setDetails]=useState(fields)
     const [errorState, setErrorState] = useState("");
@@ -39,7 +39,7 @@ function Profile( {user} ) {
             const { data, error } = await supabase.auth.api.resetPasswordForEmail(
                 user.email,
                 {
-                  redirectTo: `${window.location.origin}/password-reset`,
+                  redirectTo: `${headers.host}/password-reset`,
                 }
             )
 

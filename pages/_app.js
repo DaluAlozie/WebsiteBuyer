@@ -60,12 +60,7 @@ function MyApp({ Component, pageProps }) {
     const user = supabase.auth.user()
     setSignedInUser( (user)? true: false)
 
-    if (user) {
-      let { data: Profile, error } = await supabase
-        .from('Profile')
-        .select("firstName,surname")
-        .eq('user_id', user.id)
-    }
+    console.log(user);
   }
 
   async function handleAuthChange(event, session) {

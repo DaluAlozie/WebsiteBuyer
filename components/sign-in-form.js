@@ -1,11 +1,10 @@
 import Link from "next/link"
-import PasswordStrengthBar from 'react-password-strength-bar';
-import { useState, useEffect } from 'react'
-import { TextClass } from "../constants/styling";
 import Input from "./inputs";
 import Button from "./button";
 import Form from "./form";
+import MoreLogins from "./thirdPartyButtons";
 
+import { signInAzure, signInGoogle } from "./thirdPartySignIn";
 const dont = "Don't"
 
 export default function LoginForm({handleChange,handleSubmit,error}){
@@ -66,7 +65,17 @@ export default function LoginForm({handleChange,handleSubmit,error}){
                             {dont} have an account? Sign Up!
                         </span>
                 </Link>
-
+                <div>
+                    <span className="py-2 mb-3 font-mono text-sm leading-tight text-blue-500 align-baseline text-left">
+                    Or login with.....
+                    </span>
+                    <MoreLogins
+                    handleGoogle={signInGoogle}
+                    handleAzure={signInAzure}
+                    >
+                        
+                    </MoreLogins>      
+                </div>
             </div>
         </Form>
      

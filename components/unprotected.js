@@ -11,5 +11,5 @@ export default async function checkAnonUser({req}) {
     }
 
     // Pass data to the page via props
-    return { props: {} }
+    return { props: { headers: req.headers} }
 }

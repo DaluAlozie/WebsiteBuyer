@@ -3,8 +3,6 @@ import { supabase } from '../utils/supabaseClient'
 import LoginForm from '../components/sign-in-form';
 import { useRouter } from 'next/router'
 import checkAnonUser from '../components/unprotected'
-import toast, { Toaster } from 'react-hot-toast';
-
 
 const fields= {
     email: "hi",
@@ -44,9 +42,9 @@ export default function SignIn() {
 
     return(
         <LoginForm 
-        handleChange={handleChange}
-        handleSubmit={handleSubmit} 
-        error={errorState}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit} 
+            error={errorState}
         />
     )   
 }

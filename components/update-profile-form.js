@@ -41,13 +41,12 @@ export default function ProfileForm({handleChange,handleSubmit,handleReset,error
                 
             </div>
             <div className="mb-6 text-center">
-                <button
-                    className="w-full px-4 py-2 font-mono font-bold text-gray-300 bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+                <Button
                     type="submit"
                     onClick={submitForm}
                 >
                     Update Profile
-                </button>
+                </Button>
             </div>
             <hr className="mb-6 border-t" />
 
