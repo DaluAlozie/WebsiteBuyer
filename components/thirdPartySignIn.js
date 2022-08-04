@@ -11,8 +11,6 @@ export async function signInAzure(e) {
   e.preventDefault()
   const { user, session, error } = await supabase.auth.signIn({
     provider: 'azure',
-  }, {
-      scopes: 'email',
   })
 }
 export async function signInFacebook(e) {
