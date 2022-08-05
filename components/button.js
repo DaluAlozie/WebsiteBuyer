@@ -13,5 +13,5 @@ export default function Button({id,type,onClick,children}) {
             {children}
         </button>
         </>
-    )
+    )      
 }

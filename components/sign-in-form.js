@@ -4,7 +4,7 @@ import Button from "./button";
 import Form from "./form";
 import MoreLogins from "./thirdPartyButtons";
 
-import { signInAzure, signInGoogle } from "./thirdPartySignIn";
+import { signInAzure, signInFacebook, signInGoogle,signInLinkedin } from "./thirdPartySignIn";
 const dont = "Don't"
 
 export default function LoginForm({handleChange,handleSubmit,error}){
@@ -72,8 +72,9 @@ export default function LoginForm({handleChange,handleSubmit,error}){
                     <MoreLogins
                     handleGoogle={signInGoogle}
                     handleAzure={signInAzure}
+                    handleFacebook={signInFacebook}
+                    handleLinkedin={signInLinkedin}
                     >
-                        
                     </MoreLogins>      
                 </div>
             </div>

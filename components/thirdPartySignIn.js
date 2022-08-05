@@ -2,10 +2,10 @@ import { supabase } from '../utils/supabaseClient'
 import toast from 'react-hot-toast';
 
 export async function signInGoogle(e) {
-     e.preventDefault()
-    const { user, session, error } = await supabase.auth.signIn({
-           provider: 'google'
-      })
+  e.preventDefault()
+  const { user, session, error } = await supabase.auth.signIn({
+          provider: 'google'
+  })
 }
 export async function signInAzure(e) {
   e.preventDefault()
@@ -15,13 +15,16 @@ export async function signInAzure(e) {
 }
 export async function signInFacebook(e) {
   e.preventDefault()
+
  const { user, session, error } = await supabase.auth.signIn({
      provider: 'facebook'
-   })
+  })
 }
-export async function signInLin(e) {
+
+export async function signInLinkedin(e) {
   e.preventDefault()
- const { user, session, error } = await supabase.auth.signIn({
-     provider: 'LinkedIn'
-   })
+  const { user, session, error } = await supabase.auth.signIn({
+    provider: 'Linkedin',
+  })
 }
+

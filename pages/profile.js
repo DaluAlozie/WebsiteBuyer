@@ -30,8 +30,6 @@ function Profile( {user,headers} ) {
     function handleChange(e) {
         setDetails({...details,[e.target.id]:e.target.value})
     }
-
-
     async function handleReset(e){
         e.target.disabled = true
         e.preventDefault()
@@ -62,20 +60,21 @@ function Profile( {user,headers} ) {
         if (!(firstName && surname)) setErrorState("Please fill in all fields")
 
         else{
-            const user = supabase.auth.user()
             try {
+                const user = supabase.auth.user()
                 const { data, error } = await supabase
                     .from('Profile')
-                    .update({firstName: capitalizeFirstLetter(firstName.toString()),
-                            surname: capitalizeFirstLetter(surname.toString()) 
+                    .upsert({
+                        firstName: capitalizeFirstLetter(firstName.toString()),
+                        surname: capitalizeFirstLetter(surname.toString()),
+                        user_id: user.id
                     })
-                    .eq("user_id", user.id)
 
                     if (data && !error){
                         toast.success("Update Successful")
                     }
                     else if (data && !error){
-                        toast.error("Update Unuccessful")
+                        toast.error("Update Unsuccessful")
                     }
             } catch (error) {
                 toast.error("An error occured")
@@ -96,7 +95,6 @@ function Profile( {user,headers} ) {
             .single()
         
         if (data) setDetails(data)
-        else setErrorState(error)
     }
       
 

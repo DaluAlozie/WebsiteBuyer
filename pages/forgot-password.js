@@ -10,7 +10,6 @@ export default function ForgotPaasword({headers}) {
 
     const router = useRouter()
 
-
     async function handleSubmit(e) {
         console.log(`${headers.host}/sign-in`);
 
@@ -20,7 +19,6 @@ export default function ForgotPaasword({headers}) {
                 redirectTo: `${headers.host}/password-reset`,
             }
         )
-        console.log(data);
         if (error) toast.error(error.message)
         else {
             toast.success("Reset link sent to email") 

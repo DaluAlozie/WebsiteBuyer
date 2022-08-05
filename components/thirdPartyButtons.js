@@ -7,14 +7,14 @@ export default function MoreLogins({handleAzure,handleGoogle,handleFacebook,hand
     // Fetch data from external API
     return(
         <div className="flex flex-row justify-center mt-4">
-            <div className="mr-1 ml-1">
+            {/* <div className="mr-1 ml-1">
                 <button onClick={handleLinkedin}>
                     <LinkedinIcon
                     round={true}
                     size={41}>
                     </LinkedinIcon>
                 </button>
-            </div>
+            </div> */}
             <div className="mr-1 ml-1">
                 <button onClick={handleFacebook}>
                     <FacebookIcon
