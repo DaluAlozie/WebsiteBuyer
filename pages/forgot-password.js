@@ -1,7 +1,6 @@
 import { useState,useEffect } from 'react';
 import { supabase } from '../utils/supabaseClient'
 import { useRouter } from 'next/router'
-import checkAnonUser from '../components/unprotected'
 import ForgotForm from '../components/forgot-password-form';
 import toast from 'react-hot-toast';
 
@@ -10,13 +9,18 @@ export default function ForgotPaasword({headers}) {
 
     const router = useRouter()
 
+
     async function handleSubmit(e) {
-        console.log(`${headers.host}/sign-in`);
+
+        const response = await handleEmail().then((res) => res)
+        if (!response) return false
+        
+        e.target.disabled = true
 
         const { data, error } = await supabase.auth.api.resetPasswordForEmail(
             email,
             {
-                redirectTo: `${headers.host}/password-reset`,
+                redirectTo: `${window.location.origin}/password-reset`,
             }
         )
         if (error) toast.error(error.message)
@@ -24,6 +28,29 @@ export default function ForgotPaasword({headers}) {
             toast.success("Reset link sent to email") 
             router.push("/sign-in")
         }
+
+        e.target.disabled = false
+
+    }
+
+    async function handleEmail() {
+        const { data, error} = await supabase
+        .from('profiles')
+        .select("provider")
+        .ilike('email', email)
+        .single()
+
+        const provider = data?.provider
+
+        if (!provider) toast.error("Email does not exists")
+        else if (!(provider == "email")){
+            toast.error("Cannot reset password for third party login")
+        }
+        else{
+            return true
+        }
+
+        return false
     }
 
     async function handleChange(e) {
@@ -36,8 +63,4 @@ export default function ForgotPaasword({headers}) {
         handleChange={handleChange}
         />
     )
-}
-
-export async function getServerSideProps(req) {
-    return checkAnonUser(req)
 }

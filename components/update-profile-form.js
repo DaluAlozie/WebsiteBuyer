@@ -6,7 +6,7 @@ import Input from "./inputs";
 import Button from "./button";
 import Form from "./form";
 
-export default function ProfileForm({handleChange,handleSubmit,handleReset,error,details}){
+export default function ProfileForm({handleChange,handleSubmit,handleReset,error,details,provider}){
 
     function submitForm(e) {
         e.preventDefault()
@@ -49,15 +49,17 @@ export default function ProfileForm({handleChange,handleSubmit,handleReset,error
                 </Button>
             </div>
             <hr className="mb-6 border-t" />
+            {provider == "email" && (
+                <div className="mt-12 mb-6 text-center">
+                    <Button
+                        type="submit"
+                        onClick={handleReset}
+                    >
+                        Reset Password
+                    </Button>
+                </div>
+            )}
 
-            <div className="mt-12 mb-6 text-center">
-                <Button
-                    type="submit"
-                    onClick={handleReset}
-                >
-                    Reset Password
-                </Button>
-            </div>
             <div className="mb-2 text-xs text-red-600">
                 {error}
             </div>        

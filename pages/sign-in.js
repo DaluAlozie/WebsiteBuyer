@@ -2,7 +2,6 @@ import { useState,useEffect } from 'react';
 import { supabase } from '../utils/supabaseClient'
 import LoginForm from '../components/sign-in-form';
 import { useRouter } from 'next/router'
-import checkAnonUser from '../components/unprotected'
 
 const fields= {
     email: "hi",
@@ -47,8 +46,4 @@ export default function SignIn() {
             error={errorState}
         />
     )   
-}
-
-export async function getServerSideProps(req) {
-    return checkAnonUser(req)
 }

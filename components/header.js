@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import {NavLinkLeft } from "../constants/styling";
+import {NavLink } from "../constants/styling";
 import { signOut } from './sign-out'
 
 
@@ -39,7 +39,7 @@ export default function Header({signedInUser}) {
                 <div id="navbar" className='justify-between hidden w-full font-mono lg:inline-flex lg:flex-grow lg:w-auto'>
                 <div className='flex flex-col items-start w-1/2 lg:inline-flex lg:flex-row lg:w-auto lg:items-center lg:h-auto'>
                     <Link href='/'>
-                    <a className={NavLinkLeft}>
+                    <a className={NavLink}>
                         Home
                     </a>
                     </Link>
@@ -47,12 +47,12 @@ export default function Header({signedInUser}) {
                     { signedInUser && (
                     <>
                     <Link href='/profile'>
-                        <a className={NavLinkLeft}>
+                        <a className={NavLink}>
                         Profile
                         </a>
                     </Link>
                     <Link href='/buy-a-website'>
-                        <a className={NavLinkLeft}>
+                        <a className={NavLink}>
                         Design Website
                         </a>
                     </Link>
@@ -66,7 +66,7 @@ export default function Header({signedInUser}) {
                 { signedInUser && (
                     <>
                     <Link href="">
-                        <a className={NavLinkLeft} onClick={signOut}>
+                        <a className={NavLink} onClick={signOut}>
                         Logout
                         </a>
                     </Link>
@@ -75,12 +75,12 @@ export default function Header({signedInUser}) {
                     { !signedInUser && (
                     <>
                     <Link href='/sign-in'>
-                        <a className={NavLinkLeft}>
+                        <a className={NavLink}>
                         Login
                         </a>
                     </Link>
                     <Link href='/sign-up'>
-                        <a className={NavLinkLeft}>
+                        <a className={NavLink}>
                         Sign Up
                         </a>
                     </Link>

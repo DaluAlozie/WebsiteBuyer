@@ -2,8 +2,7 @@ import { useState,useEffect } from 'react';
 import { supabase } from '../utils/supabaseClient'
 import SignUpForm from '../components/sign-up-form';
 import { useRouter } from 'next/router'
-import checkAnonUser from '../components/unprotected'
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -15,8 +14,6 @@ const fields= {
     password: "",
     confirmPassword: ""
 }
-const buttonClass = "relative flex justify-center w-full px-4 py-2 mt-10 text-sm font-medium text-white bg-purple-600 border border-transparent rounded-md group hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
-const errorTextClass = "p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
 
 export default function SignUp() {
     const [details,setDetails]=useState(fields);
@@ -30,7 +27,28 @@ export default function SignUp() {
 
     }
 
+    async function handleEmail() {
+        const { data, error} = await supabase
+        .from('profiles')
+        .select("provider")
+        .ilike('email', email)
+        .single()
+
+        const provider = data?.provider
+
+        if (provider) {
+            toast.error("Email already exists")
+            return false
+        }
+        
+        return true
+    }
+
     async function handleSubmit(e) {
+        
+        const response = await handleEmail().then((res) => res)
+        if (!response) return false
+
         e.target.disabled = true
         setErrorState("")
         if (!(firstName && surname && email && password && confirmPassword)) setErrorState("Please fill in all fields")
@@ -44,11 +62,11 @@ export default function SignUp() {
               if (user){
                 try {
                     const { data, error } = await supabase
-                    .from('Profile')
-                    .insert({
+                    .from('profiles')
+                    .upsert({
                         firstName: capitalizeFirstLetter(firstName.toString()),
                         surname: capitalizeFirstLetter(surname.toString()),
-                        user_id: user.id.toString()
+                        id: user.id.toString()
                       },
                       {
                         returning: "minimal"
@@ -59,6 +77,7 @@ export default function SignUp() {
                         router.push("/sign-in")
                     }
                     else{
+                        console.log(error);
                         toast.error(error.message)
                     }
                 } catch (error) {
@@ -78,8 +97,4 @@ export default function SignUp() {
             password={password}
         />
     )   
-}
-
-export async function getServerSideProps(req) {
-    return checkAnonUser(req)
 }

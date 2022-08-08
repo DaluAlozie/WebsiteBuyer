@@ -7,7 +7,7 @@ export default function MoreLogins({handleAzure,handleGoogle,handleFacebook,hand
     // Fetch data from external API
     return(
         <div className="flex flex-row justify-center mt-4">
-            {/* <div className="mr-1 ml-1">
+            {/* <div className="ml-1 mr-1">
                 <button onClick={handleLinkedin}>
                     <LinkedinIcon
                     round={true}
@@ -15,7 +15,7 @@ export default function MoreLogins({handleAzure,handleGoogle,handleFacebook,hand
                     </LinkedinIcon>
                 </button>
             </div> */}
-            <div className="mr-1 ml-1">
+            <div className="ml-1 mr-1">
                 <button onClick={handleFacebook}>
                     <FacebookIcon
                     round={true}
@@ -23,9 +23,9 @@ export default function MoreLogins({handleAzure,handleGoogle,handleFacebook,hand
                     </FacebookIcon>
                 </button>
             </div>
-            <div className="mr-1 ml-1">
+            <div className="ml-1 mr-1">
                 <button 
-                className="bg-white rounded-full w-10 h-10 p-0 mt-"
+                className="w-10 h-10 p-0 bg-white rounded-full mt-"
                 onClick={handleGoogle}>
                     <Image src={googleLogo}
                         height={40}
@@ -34,9 +34,9 @@ export default function MoreLogins({handleAzure,handleGoogle,handleFacebook,hand
                     </Image>
                 </button> 
             </div>
-            <div className="mr-1 ml-1">
+            <div className="ml-1 mr-1">
                 <button 
-                className="bg-white rounded-full w-10 h-10 pt-1 m-0"
+                className="w-10 h-10 pt-1 m-0 bg-white rounded-full"
                 onClick={handleAzure}>
                     <Image src={azureLogo}
                         height={20}

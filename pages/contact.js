@@ -9,7 +9,3 @@ export default function Contact() {
     </div>
   )
 }
-
-export async function getServerSideProps(req) {
-    return checkAuthUser(req)
-}

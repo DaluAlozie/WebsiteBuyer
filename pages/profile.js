@@ -1,8 +1,7 @@
-import checkAuthUser from '../components/protected'
 import ProfileForm from '../components/update-profile-form';
 import { supabase } from '../utils/supabaseClient'
 import { useState, useEffect } from 'react'
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 
 const fields= {
@@ -15,16 +14,40 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function Profile( {user,headers} ) {
+export default function Profile( props ) {
     
     const [details,setDetails]=useState(fields)
     const [errorState, setErrorState] = useState("");
+    const [provider, setProvider] = useState("");
+
 
     const {firstName, surname} = details
 
     useEffect(  () => {
-        getUserProfile()
+
+        getUserProfile()        
     },[])
+
+    async function handleEmail() {
+        const { data, error} = await supabase
+        .from('profiles')
+        .select("provider")
+        .ilike('email', email)
+        .single()
+
+        const provider = data?.provider
+
+        if (!provider) toast.error("Email does not exists")
+        else if (!(provider == "email")){
+            toast.error("Cannot reset password for third party login")
+        }
+        else{
+            return true
+        }
+
+        return false
+    }
+
 
 
     function handleChange(e) {
@@ -34,10 +57,15 @@ function Profile( {user,headers} ) {
         e.target.disabled = true
         e.preventDefault()
         try {
+            const user = supabase.auth.user()
+
+            const response = await handleEmail().then((res) => res)
+            if (!response) return false
+
             const { data, error } = await supabase.auth.api.resetPasswordForEmail(
                 user.email,
                 {
-                  redirectTo: `${headers.host}/password-reset`,
+                  redirectTo: `${window.location.origin}/password-reset`,
                 }
             )
 
@@ -46,6 +74,7 @@ function Profile( {user,headers} ) {
 
             
         } catch (error) {
+            console.log(error);
             toast.error("An error occured :/")
         }        
 
@@ -63,11 +92,11 @@ function Profile( {user,headers} ) {
             try {
                 const user = supabase.auth.user()
                 const { data, error } = await supabase
-                    .from('Profile')
+                    .from('profiles')
                     .upsert({
                         firstName: capitalizeFirstLetter(firstName.toString()),
                         surname: capitalizeFirstLetter(surname.toString()),
-                        user_id: user.id
+                        id: user.id
                     })
 
                     if (data && !error){
@@ -85,18 +114,22 @@ function Profile( {user,headers} ) {
 
     }
     async function getUserProfile(){
-        setErrorState("")
-        const user = supabase.auth.user()
-
-        const { data: data, error} = await supabase
-            .from('Profile')
-            .select("firstName,surname")
-            .eq('user_id', user.id)
-            .single()
-        
-        if (data) setDetails(data)
+        try {
+            setErrorState("")
+            const user = supabase.auth.user()
+            setProvider(user.identities[0].provider.toLowerCase())
+    
+            const { data: data, error} = await supabase
+                .from('profiles')
+                .select("firstName,surname")
+                .eq('id', user.id)
+                .single()
+            
+            if (data) setDetails(data)
+        } catch (error) {
+            toast.error("An error occurred")
+        }
     }
-      
 
     return (
         <ProfileForm 
@@ -105,13 +138,8 @@ function Profile( {user,headers} ) {
             handleSubmit={ handleSubmit }
             details= { details }
             error={ errorState }
+            provider={provider}
         />
     )
 }
 
-export async function getServerSideProps(req) {
-    return checkAuthUser(req)
-}
-
-
-export default Profile

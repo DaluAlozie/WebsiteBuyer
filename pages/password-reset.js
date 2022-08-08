@@ -1,4 +1,3 @@
-import Link from "next/link"
 import { useState, useEffect } from 'react'
 import ResetForm from "../components/password-reset-form"
 import { useRouter } from 'next/router'
@@ -20,7 +19,6 @@ export default function PasswordReset( context ){
     const {password, confirmPassword} = details
 
     const router = useRouter()
-
     
     useEffect( () => {
         

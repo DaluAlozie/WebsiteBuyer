@@ -6,6 +6,7 @@ export async function signInGoogle(e) {
   const { user, session, error } = await supabase.auth.signIn({
           provider: 'google'
   })
+  console.log(error);
 }
 export async function signInAzure(e) {
   e.preventDefault()

@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^1.35.4",
-    "next": "12.2.3",
+    "next": "^12.2.4",
     "next-share": "^0.12.1",
     "next-themes": "^0.2.0",
     "nookies": "^2.5.2",
