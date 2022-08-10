@@ -2,9 +2,10 @@ import Image from "next/image";
 import { LinkedinIcon,FacebookIcon } from "next-share";
 import googleLogo from '../public/google-logo.svg'
 import azureLogo from '../public/microsoft-logo.svg'
+import { useRouter } from 'next/router'
 
 export default function MoreLogins({handleAzure,handleGoogle,handleFacebook,handleLinkedin}) {
-    // Fetch data from external API
+
     return(
         <div className="flex flex-row justify-center mt-4">
             {/* <div className="ml-1 mr-1">
