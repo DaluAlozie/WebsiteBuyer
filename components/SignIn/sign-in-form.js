@@ -1,7 +1,7 @@
 import Link from "next/link"
-import Input from "./inputs";
-import Button from "./button";
-import Form from "./form";
+import Input from "../FormComponents/inputs";
+import Button from "../FormComponents/button";
+import Form from "../FormComponents/form";
 import MoreLogins from "./thirdPartyButtons";
 
 import { signInAzure, signInFacebook, signInGoogle,signInLinkedin } from "../thirdPartySignIn";

@@ -1,9 +1,8 @@
-import Link from "next/link"
 import PasswordStrengthBar from 'react-password-strength-bar';
 import { useState, useEffect } from 'react'
-import Input from "./inputs";
-import Button from "./button";
-import Form from "./form";
+import Input from "../FormComponents/inputs";
+import Button from "../FormComponents/button";
+import Form from "../FormComponents/form";
 
 
 export default function ResetForm({handleChange,handleSubmit,error,password}){

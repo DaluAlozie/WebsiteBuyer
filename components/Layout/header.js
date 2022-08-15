@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import {NavLink } from "../../constants/styling";
-import { signOut } from '../sign-out'
+import { signOut } from '../SignOut/sign-out'
 
 
 export default function Header({signedInUser}) {

@@ -2,7 +2,6 @@ import Image from "next/image";
 import { LinkedinIcon,FacebookIcon } from "next-share";
 import googleLogo from '../public/google-logo.svg'
 import azureLogo from '../public/microsoft-logo.svg'
-import { useRouter } from 'next/router'
 
 export default function MoreLogins({handleAzure,handleGoogle,handleFacebook,handleLinkedin}) {
 
@@ -31,6 +30,7 @@ export default function MoreLogins({handleAzure,handleGoogle,handleFacebook,hand
                     <Image src={googleLogo}
                         height={40}
                         width={40}
+                        alt="Goodle"
                         >
                     </Image>
                 </button> 
@@ -42,6 +42,7 @@ export default function MoreLogins({handleAzure,handleGoogle,handleFacebook,hand
                     <Image src={azureLogo}
                         height={20}
                         width={20}
+                        alt="Microsoft"
                         >
                     </Image>
                 </button> 

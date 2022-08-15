@@ -1,4 +1,4 @@
-import ProfileForm from '../components/update-profile-form';
+import ProfileForm from '../components/Profile/update-profile-form';
 import { supabase } from '../utils/supabaseClient'
 import { useState, useEffect } from 'react'
 import toast from 'react-hot-toast';
