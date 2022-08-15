@@ -3,9 +3,9 @@ import { supabase } from '../utils/supabaseClient'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Toaster } from 'react-hot-toast';
-import Header from '../components/header';
-import Footer from '../components/footer';
-import Main from '../components/main';
+import Header from '../components/Layout/header';
+import Main from '../components/Layout/main';
+import Footer from '../components/Layout/footer';
 
 function MyApp({ Component, pageProps }) {
   const [ signedInUser, setSignedInUser ] = useState(false)

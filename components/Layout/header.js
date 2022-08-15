@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import {NavLink } from "../constants/styling";
-import { signOut } from './sign-out'
+import {NavLink } from "../../constants/styling";
+import { signOut } from '../sign-out'
 
 
 export default function Header({signedInUser}) {
@@ -51,9 +51,14 @@ export default function Header({signedInUser}) {
                         Profile
                         </a>
                     </Link>
-                    <Link href='/buy-a-website'>
+                    <Link href='/design-website'>
                         <a className={NavLink}>
                         Design Website
+                        </a>
+                    </Link>
+                    <Link href='/checkout'>
+                        <a className={NavLink}>
+                            Checkout
                         </a>
                     </Link>
                     </>

@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@stripe/react-stripe-js": "^1.10.0",
+    "@stripe/stripe-js": "^1.35.0",
     "@supabase/supabase-js": "^1.35.4",
     "next": "^12.2.4",
     "next-share": "^0.12.1",
@@ -17,7 +19,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.3.0",
-    "react-password-strength-bar": "^0.4.1"
+    "react-password-strength-bar": "^0.4.1",
+    "stripe": "^10.1.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.8",
