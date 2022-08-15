@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import ResetForm from "../components/password-reset-form"
+import ResetForm from "../components/ResetPassword/password-reset-form"
 import { useRouter } from 'next/router'
 import { supabase } from '../utils/supabaseClient'
 import toast from 'react-hot-toast';
