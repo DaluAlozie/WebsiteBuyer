@@ -56,31 +56,29 @@ export default function SignUpForm({handleChange,handleSubmit,error,password}){
                     label="Email"
                 />
             </div>
-            <div className="mb-4 md:flex md:justify-between">
-                <div className="mb-4 md:mr-2 md:mb-0">
-                    <Input
-                        id="password"
-                        type="password"
-                        placeholder="******************"
-                        onChange={handleChange}
-                        required={true}
-                        label="Password"
-                    />
-                    <PasswordStrengthBar password={password} onChangeScore={updatePasswordScore}/>
-                    <div className="mt-1 mb-2 text-xs text-red-600 ">
-                        {scoreError}
-                    </div>
-                </div>
-                <div className="md:ml-2">
+            <div className="mb-4">
                 <Input
-                    id="confirmPassword"
+                    id="password"
                     type="password"
                     placeholder="******************"
                     onChange={handleChange}
                     required={true}
-                    label="Confirm Password"
+                    label="Password"
                 />
+                <PasswordStrengthBar password={password} onChangeScore={updatePasswordScore}/>
+                <div className="mt-1 mb-2 text-xs text-red-600 ">
+                    {scoreError}
                 </div>
+            </div>
+            <div className="mb-2">
+            <Input
+                id="confirmPassword"
+                type="password"
+                placeholder="******************"
+                onChange={handleChange}
+                required={true}
+                label="Confirm Password"
+            />
             </div>
             <div className="mb-6 text-center">
                 <Button
@@ -96,7 +94,7 @@ export default function SignUpForm({handleChange,handleSubmit,error,password}){
             <hr className="mb-6 border-t" />
             <div className="text-center">
                 <Link className="inline-block "
-                    href="/login">
+                    href="/sign-in">
                         <span className="px-3 py-2 mb-3 text-sm leading-tight text-blue-500 align-baseline hover:text-blue-200">
                             Already have an account? Login!
                         </span>

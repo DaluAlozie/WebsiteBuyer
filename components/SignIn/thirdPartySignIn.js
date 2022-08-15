@@ -1,4 +1,4 @@
-import { supabase } from '../utils/supabaseClient'
+import { supabase } from '../../utils/supabaseClient';
 import toast from 'react-hot-toast';
 
 export async function signInGoogle(e) {

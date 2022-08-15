@@ -1,6 +1,6 @@
 import { useState,useEffect } from 'react';
 import { supabase } from '../utils/supabaseClient'
-import LoginForm from '../components/sign-in-form';
+import LoginForm from '../components/SignIn/sign-in-form';
 import { useRouter } from 'next/router'
 
 const fields= {

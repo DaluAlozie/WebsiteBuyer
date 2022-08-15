@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { LinkedinIcon,FacebookIcon } from "next-share";
-import googleLogo from '../public/google-logo.svg'
-import azureLogo from '../public/microsoft-logo.svg'
+import googleLogo from '../../public/google-logo.svg'
+import azureLogo from '../../public/microsoft-logo.svg'
+
 
 export default function MoreLogins({handleAzure,handleGoogle,handleFacebook,handleLinkedin}) {
 

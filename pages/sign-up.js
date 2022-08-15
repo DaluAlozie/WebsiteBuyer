@@ -1,6 +1,6 @@
 import { useState,useEffect } from 'react';
 import { supabase } from '../utils/supabaseClient'
-import SignUpForm from '../components/sign-up-form';
+import SignUpForm from '../components/SignUp/sign-up-form';
 import { useRouter } from 'next/router'
 import toast from 'react-hot-toast';
 

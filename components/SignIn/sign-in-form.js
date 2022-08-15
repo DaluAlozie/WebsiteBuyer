@@ -4,7 +4,7 @@ import Button from "../FormComponents/button";
 import Form from "../FormComponents/form";
 import MoreLogins from "./thirdPartyButtons";
 
-import { signInAzure, signInFacebook, signInGoogle,signInLinkedin } from "../thirdPartySignIn";
+import { signInAzure, signInFacebook, signInGoogle,signInLinkedin } from "./thirdPartySignIn";
 const dont = "Don't"
 
 export default function LoginForm({handleChange,handleSubmit,error}){
@@ -26,7 +26,7 @@ export default function LoginForm({handleChange,handleSubmit,error}){
                     label="Email"
                 />
             </div>
-            <div className="mb-4">
+            <div className="mb-1">
                 <Input
                     id="password"
                     type="password"
@@ -46,7 +46,6 @@ export default function LoginForm({handleChange,handleSubmit,error}){
             </div>           
             <div className="mb-6 text-center">
                 <Button
-                    className="w-full px-4 py-2 font-mono font-bold text-gray-300 bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
                     type="submit"
                     onClick={submitForm}
                 >
