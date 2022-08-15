@@ -1,7 +1,7 @@
 import { useState,useEffect } from 'react';
 import { supabase } from '../utils/supabaseClient'
 import { useRouter } from 'next/router'
-import ForgotForm from '../components/forgot-password-form';
+import ForgotForm from '../components/ForgotPassword/forgot-password-form';
 import toast from 'react-hot-toast';
 
 export default function ForgotPaasword({headers}) {

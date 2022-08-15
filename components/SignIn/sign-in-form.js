@@ -4,7 +4,7 @@ import Button from "./button";
 import Form from "./form";
 import MoreLogins from "./thirdPartyButtons";
 
-import { signInAzure, signInFacebook, signInGoogle,signInLinkedin } from "./thirdPartySignIn";
+import { signInAzure, signInFacebook, signInGoogle,signInLinkedin } from "../thirdPartySignIn";
 const dont = "Don't"
 
 export default function LoginForm({handleChange,handleSubmit,error}){
