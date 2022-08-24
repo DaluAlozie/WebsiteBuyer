@@ -39,11 +39,7 @@ export default async function webhookHandler(req, res) {
                   user_id: paymentIntent.metadata.user_id,
                 },
               });
-            
-              await stripe.paymentIntents.update(paymentIntent.id, {
-                customer: customer.id,
-              });
-            
+
             res.status(200).send()
 
         } catch (error) {

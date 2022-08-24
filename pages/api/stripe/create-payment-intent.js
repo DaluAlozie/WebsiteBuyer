@@ -3,12 +3,13 @@ import  { Nextreq } from 'next/server'
 import { supabase } from "../../../utils/supabaseClient";
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-const calculateOrderAmount = (items) => {
+function calculateOrderAmount(items){
   // Replace this constant with a calculation of the order's amount
   // Calculate the order total on the server to prevent
   // people from directly manipulating the amount on the client
   return 1400;
 };
+
 
 export default async function handler(req, res) {
   const token = req.cookies['sb-access-token'];
@@ -29,13 +30,12 @@ export default async function handler(req, res) {
       currency: "gbp",
       metadata: {
         user_id: user.id,
-        email: user.email
+        email: user.email,
       }
     });
 
     res.status(200).send({
       clientSecret: paymentIntent.client_secret,
     });
-
   }
 };
