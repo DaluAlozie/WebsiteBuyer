@@ -20,8 +20,9 @@ export default async function webhookHandler(req, res) {
                     .from('profiles')
                     .update({
                         stripe_customer_id: customer.id,
-                        id: user.id
                     })
+                    .eq('id',req.body.record.id)
+
             }
       
             res.status(200).send()
