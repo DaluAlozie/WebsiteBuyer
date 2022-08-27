@@ -33,12 +33,6 @@ export default async function webhookHandler(req, res) {
                     res.status(200).end();
                     return;
             }
-            const customer = await stripe.customers.create({
-                email: paymentIntent.metadata.email,
-                metadata: {
-                  user_id: paymentIntent.metadata.user_id,
-                },
-              });
 
             res.status(200).send()
 
