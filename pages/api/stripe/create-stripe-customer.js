@@ -7,7 +7,6 @@ export default async function webhookHandler(req, res) {
     if (req.method === 'POST'){
 
         try {
-            console.log(req.body.record.email,req.body.record.id);
                 const customer = await stripe.customers.create({
                 email: req.body.record.email,
                 metadata: {

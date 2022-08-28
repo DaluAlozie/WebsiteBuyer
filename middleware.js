@@ -5,7 +5,7 @@ import { supabase } from './utils/supabaseClient'
 export async function middleware(req) {
   const token = req.cookies.get('sb-access-token');
   if (token){
-    const user = await fetch(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/auth/v1/user`, {
+    const user  = await fetch(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/auth/v1/user`, {
       headers: {
         Authorization: `Bearer ${token}`,
         APIKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
@@ -13,9 +13,9 @@ export async function middleware(req) {
     }).then((res) => res.json()); 
 
     //Authenticated users can only navigate to these pages 
-    if (user){
+    if (user && user?.id){
       if (req.nextUrl.pathname.startsWith('/profile') || 
-          req.nextUrl.pathname.startsWith('/buy-a-website') ||
+          req.nextUrl.pathname.startsWith('design-website') ||
           req.nextUrl.pathname.startsWith('/contact') ||
           req.nextUrl.pathname.startsWith('/checkout') 
           ){
@@ -23,7 +23,8 @@ export async function middleware(req) {
       }
     }
   }
-  else if (req.nextUrl.pathname.startsWith('/sign-in') ||
+  //Unauthenticated users can only navigate to these pages 
+  if (req.nextUrl.pathname.startsWith('/sign-in') ||
       req.nextUrl.pathname.startsWith('/sign-up') ||
       req.nextUrl.pathname.startsWith('/forgot-password')
       ){
@@ -34,5 +35,5 @@ export async function middleware(req) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher:  ['/sign-in', '/sign-up', '/buy-a-website','/contact','/profile','/forgot-password'],
+  matcher:  ['/sign-in', '/sign-up', '/design-website','/contact','/profile','/forgot-password','/checkout'],
 }
