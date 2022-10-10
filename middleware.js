@@ -14,7 +14,7 @@ export async function middleware(req) {
   //Authenticated users can only navigate to these pages 
   if (user && user?.id){
     if (req.nextUrl.pathname.startsWith('/profile') || 
-        req.nextUrl.pathname.startsWith('design-website') ||
+        req.nextUrl.pathname.startsWith('/design-website') ||
         req.nextUrl.pathname.startsWith('/contact') ||
         req.nextUrl.pathname.startsWith('/checkout') 
         ){
