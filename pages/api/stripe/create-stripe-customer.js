@@ -1,13 +1,13 @@
 import Stripe from 'stripe';
-import { buffer } from 'micro';
 import { supabaseServiceRole } from '../../../utils/supabaseClient';
-export default async function webhookHandler(req, res) {
+
+export default async function handler(req, res) {
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
     if (req.method === 'POST'){
 
         try {
-                const customer = await stripe.customers.create({
+            const customer = await stripe.customers.create({
                 email: req.body.record.email,
                 metadata: {
                   user_id: req.body.record.id,
@@ -21,7 +21,6 @@ export default async function webhookHandler(req, res) {
                         stripe_customer_id: customer.id,
                     })
                     .eq('id',req.body.record.id)
-
             }
       
             res.status(200).send()

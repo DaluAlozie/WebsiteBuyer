@@ -32,8 +32,6 @@ export default function CheckoutWrapper({children}) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ 
-        user_id: user.id,
-        user_email: user.email,
         customer_id: data.stripe_customer_id,
         order: "standard"
       }),
