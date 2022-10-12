@@ -6,6 +6,7 @@ import { Toaster } from 'react-hot-toast';
 import Header from '../components/Layout/header';
 import Main from '../components/Layout/main';
 import Footer from '../components/Layout/footer';
+import { NavLink } from '../constants/styling';
 
 function MyApp({ Component, pageProps }) {
   const [ signedInUser, setSignedInUser ] = useState(false)
@@ -76,6 +77,10 @@ function MyApp({ Component, pageProps }) {
   
       </Header>
       <Main>
+        <div className="m-10 font-mono text-white ">
+          Welcome to Dalu Alozie's Website !!!!
+
+        </div>
         <Toaster
             toastOptions={{
               duration: 3700,
@@ -92,9 +97,7 @@ function MyApp({ Component, pageProps }) {
               },
             }}
           />
-        <div>
-
-        </div>
+ 
         <div className="px-16 py-8">
           <Component {...pageProps} />
         </div>

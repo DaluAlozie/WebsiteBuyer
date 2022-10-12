@@ -1,11 +1,10 @@
 import { supabase } from '../utils/supabaseClient'
-import CheckoutForm from "../components/Checkout/checkout-form";
-import CheckoutWrapper from "../components/Checkout/checkout-wrapper";
+import DesignForm from '../components/designWebsite/design-website-form'
 
-export default function DesignWebsite({user}) {
+export default function DesignWebsite() {
   return (
     <div>
-
+      <DesignForm></DesignForm>
     </div>
   )
 }

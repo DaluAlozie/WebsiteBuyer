@@ -81,6 +81,9 @@ export default function CheckoutForm() {
 
   return (
     <Form id="payment-form" onSubmit={handleSubmit}>
+      <div className="mb-10 font-mono text-center text-white">
+        Type 424242.......etc. for every input to test the payment  
+      </div>
       <PaymentElement id="payment-element" />
       <Button disabled={isLoading || !stripe || !elements} id="submit">
         <span id="button-text">
