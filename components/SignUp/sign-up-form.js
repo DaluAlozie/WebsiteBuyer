@@ -24,28 +24,6 @@ export default function SignUpForm({handleChange,handleSubmit,error,password}){
     
     return(
         <Form>
-            <div className="mb-4 md:flex md:justify-between">
-                <div className="mb-4 md:mr-2 md:mb-0">
-                    <Input
-                        id="firstName"
-                        type="text"
-                        placeholder="First Name"
-                        onChange={handleChange}
-                        required={true}
-                        label="First Name"
-                    />
-                </div>
-                <div className="md:ml-2">
-                    <Input
-                        id="surname"
-                        type="text"
-                        placeholder="Surname"
-                        onChange={handleChange}
-                        required={true}
-                        label="Surname"
-                    />
-                </div>
-            </div>
             <div className="mb-4">
                 <Input
                     id="email"

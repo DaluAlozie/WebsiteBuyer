@@ -8,8 +8,6 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 const fields= {
-    firstName: "",
-    surname: "",
     email: "",
     password: "",
     confirmPassword: ""
@@ -18,7 +16,7 @@ const fields= {
 export default function SignUp() {
     const [details,setDetails]=useState(fields);
     const [errorState, setErrorState] = useState();
-    const {firstName, surname, email, password, confirmPassword} = details
+    const {email, password, confirmPassword} = details
 
     const router = useRouter()
 
@@ -51,40 +49,17 @@ export default function SignUp() {
 
         e.target.disabled = true
         setErrorState("")
-        if (!(firstName && surname && email && password && confirmPassword)) setErrorState("Please fill in all fields")
+        if (!(email && password && confirmPassword)) setErrorState("Please fill in all fields")
         else if (!(password == confirmPassword)) setErrorState("Passwords do not match")
 
         else{
             const { user, session, error } = await supabase.auth.signUp({
                 email: email,
                 password: password
-              })
-              if (user){
-                try {
-                    const { data, error } = await supabase
-                    .from('profiles')
-                    .upsert({
-                        firstName: capitalizeFirstLetter(firstName.toString()),
-                        surname: capitalizeFirstLetter(surname.toString()),
-                        id: user.id.toString()
-                      },
-                      {
-                        returning: "minimal"
-                      })
+            })
 
-                    if (!error) {
-                        toast.success("Confirmation link sent to email")
-                        router.push("/sign-in")
-                    }
-                    else{
-                        console.log(error);
-                        toast.error(error.message)
-                    }
-                } catch (error) {
-                    toast.error("An error occured")
-                }
-              } 
-              else setErrorState(error.message)
+            if (user)toast.success("A verify email link has been sent")
+            else toast.error("An error has occured :/")
         }
         e.target.disabled = false
     }

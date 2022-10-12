@@ -25,7 +25,7 @@ export default function ForgotPaasword({headers}) {
         )
         if (error) toast.error(error.message)
         else {
-            toast.success("Reset link sent to email") 
+            toast.success("user") 
             router.push("/sign-in")
         }
 

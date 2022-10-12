@@ -28,11 +28,11 @@ export default function Profile( props ) {
         getUserProfile()        
     },[])
 
-    async function handleEmail() {
+    async function handleEmail(user) {
         const { data, error} = await supabase
         .from('profiles')
         .select("provider")
-        .ilike('email', email)
+        .ilike('email', user.email)
         .single()
 
         const provider = data?.provider
@@ -59,7 +59,7 @@ export default function Profile( props ) {
         try {
             const user = supabase.auth.user()
 
-            const response = await handleEmail().then((res) => res)
+            const response = await handleEmail(user).then((res) => res)
             if (!response) return false
 
             const { data, error } = await supabase.auth.api.resetPasswordForEmail(
@@ -70,7 +70,7 @@ export default function Profile( props ) {
             )
 
             if (error) toast.error(error.message)
-            else if (data) toast.success("Reset link sent to email")
+            else if (data) toast.success("A reset link has been sent to your email")
 
             
         } catch (error) {
