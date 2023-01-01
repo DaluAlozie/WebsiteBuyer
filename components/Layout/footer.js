@@ -1,4 +1,4 @@
-export default function Nav({signedInUser}) {
+export default function Nav() {
     // Fetch data from external API
     return(
      <footer className='bottom-0 bg-blue-800 w-full h-3/5 min-h-max'>
